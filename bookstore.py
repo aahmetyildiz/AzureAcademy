@@ -1,13 +1,11 @@
 from web_scraping import Page
 
-
-
 class Bookstore:
     def __init__(self, start_page=1, last_page=-1):
         self.page = start_page
         self.last_page = last_page
         self.url = "http://books.toscrape.com/"
-        self.star_list = { 'One': 1, 'Two': 2, 'Three':3, 'Four':4, 'Five':5}
+        self.star_list = {'One': 1, 'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5}
 
     def scrapdata(self, blok):
         url = blok.a['href']
@@ -71,7 +69,6 @@ class Bookstore:
             self.s_min = max
             self.s_max = min
 
-
         for book in self.book_list:
             if book['star'] >= self.s_min and book['star'] <= self.s_max:
                 self.star_result_list.append(book)
@@ -79,24 +76,26 @@ class Bookstore:
         return self.star_result_list
 
     def searchName(self, text):
-        self.search_result_list = []
-        self.book_list = self.getAll()
+        if len(text) >= 3 or text is None:
+            self.search_result_list = []
+            self.book_list = self.getAll()
 
-        for book in self.book_list:
-            if book['name'].find(text) >= 0:
-                self.search_result_list.append(book)
+            for book in self.book_list:
+                if book['name'].find(text) >= 0:
+                    self.search_result_list.append(book)
+
+        else:
+            self.search_result_list = ['WARNING: Serch text must be minumum 3 charachter!']
 
         return self.search_result_list
 
     def avgPrice (self):
         self.book_list = self.getAll()
-        self.sumPrice = 0
+        sumPrice = 0
         for book in self.book_list:
-            self.sumPrice += book['price']
+            sumPrice += book['price']
 
-        return self.sumPrice/len(self.book_list)
-
-
+        return sumPrice/len(self.book_list)
 
 
 #class Bookstore(Start Page [optional] as Integer, Last Page [optional] as Integer)
@@ -109,20 +108,21 @@ store = Bookstore()
 
 
 #priceFilter(minimum price as Integer, maximum price as Integer)
-#book_list = store.priceFilter(20, 50)
+book_list = store.priceFilter(20, 50)
 
 #starFilter(minimum star as Integer, maximum star [optional] as Integer)
 #book_list = store.starFilter(3, 5)
 #book_list = store.starFilter(3)
 
-#searchName(Search Text as String)
+#searchName(Search Text as String [Minimum 3 charachter])
 #book_list = store.searchName('Places')
 
-print(store.avgPrice())
+#print(store.avgPrice())
 
-"""
+
+
+
 for book in book_list:
     print(book)
 
 print(f"{str(len(book_list))} book(s) found.")
-"""
