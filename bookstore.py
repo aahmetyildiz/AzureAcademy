@@ -95,7 +95,8 @@ class Bookstore:
         for book in self.book_list:
             sumPrice += book['price']
 
-        return sumPrice/len(self.book_list)
+        avg = sumPrice/len(self.book_list)
+        return [f'Avarege Price:{avg}']
 
 
 #class Bookstore(Start Page [optional] as Integer, Last Page [optional] as Integer)
@@ -104,25 +105,24 @@ class Bookstore:
 store = Bookstore()
 
 #getAll() Get all the book data as a list
-#book_list = store.getAll()
+#result_list = store.getAll()
 
 
 #priceFilter(minimum price as Integer, maximum price as Integer)
-book_list = store.priceFilter(20, 50)
+#result_list = store.priceFilter(20, 50)
 
 #starFilter(minimum star as Integer, maximum star [optional] as Integer)
-#book_list = store.starFilter(3, 5)
-#book_list = store.starFilter(3)
+#result_list = store.starFilter(3, 5)
+#result_list = store.starFilter(3)
 
 #searchName(Search Text as String [Minimum 3 charachter])
-#book_list = store.searchName('Places')
+#result_list = store.searchName('Places')
 
-#print(store.avgPrice())
+#Avarage prices in Bookstore
+result_list = store.avgPrice()
 
 
-
-
-for book in book_list:
+for book in result_list:
     print(book)
 
-print(f"{str(len(book_list))} book(s) found.")
+print(f"{str(len(result_list))} result returned.")
