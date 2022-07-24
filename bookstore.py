@@ -1,5 +1,6 @@
 from web_scraping import Page
 
+
 class Bookstore:
     def __init__(self, start_page=1, last_page=-1):
         self.page = start_page
@@ -19,7 +20,8 @@ class Bookstore:
             'name': name,
             'price': price,
             'url': url,
-            'star': star
+            'star': star,
+            'note':'',
         }
         return data
 
